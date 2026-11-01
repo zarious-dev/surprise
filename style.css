@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&display=swap');
+
+:root {
+  --blue:  #70aceb;
+  --dark:  #315e91;
+  --light: #eaf5ff;
+  --text:  #36526d;
+  --muted: #7890a8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 12px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 15%, #cde8ff, transparent 40%),
+    radial-gradient(circle at 85% 85%, #dceaff, transparent 40%),
+    #f7fbff;
+}
+
+button { font: inherit; cursor: pointer; touch-action: manipulation; }
+button:disabled { cursor: default; }
+button:focus-visible { outline: 3px solid #285f9d; outline-offset: 3px; }
+.hidden { display: none !important; }
+
+/* ── APP SHELL ── */
+.app {
+  max-width: 760px;
+  min-height: 680px;
+  margin: auto;
+  padding: 24px;
+  background: #ffffffed;
+  border: 1px solid #dceeff;
+  border-radius: 30px;
+  box-shadow: 0 20px 60px #6697c42a;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.step-label {
+  padding: 9px 13px;
+  border-radius: 30px;
+  background: var(--light);
+}
+
+/* ── PAGES ── */
+.page { display: none; padding: 45px 10px 25px; text-align: center; }
+.page.active { display: block; animation: slideIn .4s ease; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+h1, h2 { font-family: 'Fredoka', sans-serif; color: var(--dark); }
+h1 { font-size: clamp(32px, 6vw, 48px); margin: 12px 0; }
+h2 { font-size: 26px; }
+p  { line-height: 1.7; font-size: 14px; color: var(--muted); }
+
+.eyebrow {
+  color: #4786c5;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero-emoji { font-size: 85px; margin: 15px auto; display: block; }
+.hero-emoji img { width: 120px; height: 120px; object-fit: contain; }
+
+.float { animation: float 2.2s ease-in-out infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%       { transform: translateY(-10px) rotate(3deg); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── BUTTONS ── */
+.primary, .secondary {
+  padding: 13px 24px;
+  margin: 9px 5px;
+  border: none;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform .2s;
+}
+.primary   { background: var(--blue); color: white; box-shadow: 0 5px 0 #528fcf; }
+.secondary { background: var(--light); color: var(--dark); border: 1px solid #d0e7ff; }
+.primary:hover, .secondary:hover { transform: translateY(-2px); }
+
+.status { min-height: 22px; color: #4684c2; font-weight: 600; font-size: 13px; }
+
+/* ── PIN ── */
+.pin-display {
+  width: 190px;
+  margin: 25px auto;
+  padding: 15px;
+  border-radius: 16px;
+  background: var(--light);
+  color: var(--dark);
+  font-size: 24px;
+  letter-spacing: 8px;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 290px;
+  margin: auto;
+}
+.keypad button {
+  min-height: 58px;
+  border: 1px solid #d5e8fa;
+  border-radius: 15px;
+  background: white;
+  color: var(--dark);
+  font-size: 19px;
+  font-weight: 700;
+}
+.keypad button:hover { background: var(--light); }
+#clearPin, #deletePin { font-size: 13px; background: #edf7ff; }
+
+/* ── VIDEO ── */
+.video-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 25px auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #dceeff;
+  box-shadow: 0 10px 30px #528fcf30;
+}
+.video-container video {
+  display: block;
+  width: 100%;
+  max-height: 500px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+/* ── CAKE / SONG ── */
+.scene {
+  max-width: 440px;
+  margin: 25px auto;
+  padding: 25px 15px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #e6f3ff, #f3f9ff);
+}
+
+.cake-button { border: none; background: transparent; padding: 10px; width: 100%; }
+.cake-slot   { display: flex; justify-content: center; align-items: center; width: 100%; }
+
+.cake-art {
+  display: block;
+  max-width: min(180px, 40vw);
+  max-height: 180px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  font-size: clamp(60px, 12vw, 100px);
+}
+
+.cake-button:disabled { opacity: 1; }
+.cake-button.ready    { animation: pulse 1s infinite; }
+
+@keyframes pulse { 50% { filter: drop-shadow(0 0 15px #75b8ff); } }
+
+.progress-track {
+  width: 80%;
+  height: 9px;
+  margin: 20px auto 10px;
+  background: #d3e7fa;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.progress-fill { width: 0; height: 100%; background: var(--blue); transition: width .15s linear; }
+#songTimer { font-size: 12px; color: var(--dark); }
+
+/* ── CELEBRATION CATS ── */
+.cat-row {
+  display: flex;
+  justify-content: center;
+  margin: 15px auto;
+}
+.cat-gif {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  font-size: 100px;
+}
+
+/* ── GIFTS ── */
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 30px auto;
+}
+.gift-card {
+  min-height: 160px;
+  padding: 15px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #cfe6fa;
+  border-radius: 22px;
+  background: #edf7ff;
+  color: var(--dark);
+  font-weight: 700;
+}
+.gift-icon { display: flex; align-items: center; justify-content: center; width: 100%; }
+.gift-img  { width: 100%; max-width: 80px; max-height: 80px; object-fit: contain; font-size: 55px; }
+.gift-card:hover:not(:disabled) { background: #dcefff; }
+
+.shaking { animation: shake .75s ease-in-out !important; }
+@keyframes shake {
+  0%, 100% { transform: rotate(0); }
+  20%, 60%  { transform: rotate(-12deg); }
+  40%, 80%  { transform: rotate(12deg); }
+}
+
+/* ── GIFT REVEAL ── */
+.gift-reveal-sticker {
+  display: block;
+  width: min(400px, 90vw);
+  height: auto;
+  object-fit: contain;
+  margin: 20px auto;
+}
+
+.happy-cat {
+  display: block;
+  width: min(180px, 45vw);
+  height: auto;
+  object-fit: contain;
+  margin: 15px auto;
+}
+
+.last-sticker {
+  display: block;
+  width: min(220px, 55vw);
+  height: auto;
+  object-fit: contain;
+  margin: 15px auto;
+}
+
+/* ── CAT SECTION ── */
+#catVisual { width: 160px; height: 160px; object-fit: contain; margin: 15px auto; display: block; }
+
+/* ── MEMORY GAME ── */
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto;
+}
+.game-stats span {
+  background: var(--light);
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* 6 cards in 2 rows of 3 */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 320px;
+  margin: 25px auto;
+}
+
+.memory-card {
+  aspect-ratio: .8;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #75b5ef, #b6dcff);
+  color: white;
+  font-size: clamp(22px, 5vw, 38px);
+  box-shadow: 0 4px 0 #94c4ec;
+  perspective: 600px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s;
+}
+
+/* Back face — always visible until flipped */
+.card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  transition: opacity .25s;
+}
+
+/* Front face — hidden until flipped */
+.card-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .25s;
+  background: #f1f9ff;
+  border-radius: 14px;
+}
+
+.memory-card.flipped .card-back,
+.memory-card.matched .card-back  { opacity: 0; pointer-events: none; }
+.memory-card.flipped .card-front,
+.memory-card.matched .card-front { opacity: 1; }
+
+.memory-card.flipped,
+.memory-card.matched {
+  background: #f1f9ff;
+  border: 1px solid #cbe4fa;
+  box-shadow: none;
+}
+.memory-card.matched { opacity: .75; }
+
+.card-img { width: 70%; height: 70%; object-fit: contain; font-size: clamp(22px, 5vw, 38px); }
+
+/* ── YES / NO ── */
+.answer-area {
+  position: relative;
+  min-height: 220px;
+  max-width: 430px;
+  margin: 25px auto;
+}
+#yesBtn { position: absolute; left: 15%; top: 10px; }
+#noBtn  { position: absolute; left: 60%; top: 10px; }
+
+/* ── RATINGS ── */
+.rating-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 30px auto;
+}
+.rating-buttons button {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #cbe4fa;
+  border-radius: 17px;
+  background: var(--light);
+  color: var(--dark);
+  font-size: 24px;
+  font-weight: 700;
+}
+.rating-buttons button:hover { background: #cde8ff; transform: translateY(-4px); }
+
+.final-emojis { font-size: 45px; margin: 30px 0; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: #244c7299;
+  backdrop-filter: blur(5px);
+}
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 35px 25px;
+  border-radius: 26px;
+  background: white;
+  text-align: center;
+  box-shadow: 0 20px 70px #203c5b55;
+  animation: fadeIn .3s;
+}
+#modalVisual { margin: 15px auto; min-height: 90px; display: flex; align-items: center; justify-content: center; }
+.modal-visual-img { width: 100%; max-width: 150px; max-height: 150px; object-fit: contain; font-size: 90px; }
+
+.modal-x {
+  position: absolute;
+  right: 15px; top: 12px;
+  border: none;
+  border-radius: 50%;
+  background: var(--light);
+  color: var(--dark);
+  font-size: 25px;
+  width: 36px; height: 36px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 520px) {
+  body { padding: 0; }
+  .app { min-height: 100vh; border-radius: 0; padding: 18px 12px; }
+  .page { padding: 35px 3px; }
+  .cake-art { max-width: min(140px, 35vw); max-height: 140px; }
+  .gift-grid { gap: 7px; }
+  .gift-card { min-height: 120px; }
+  .gift-img  { max-width: 55px; max-height: 55px; }
+  .game-grid { gap: 6px; }
+  .memory-card { border-radius: 9px; }
+  #yesBtn { left: 8%; }
+  #noBtn  { left: 58%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}

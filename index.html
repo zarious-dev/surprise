@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthdaaay!</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header" id="siteHeader" style="display:none">
+      <span>✦ A LITTLE SURPRISE</span>
+      <span id="stepLabel" class="step-label"></span>
+    </header>
+
+    <!-- ══════════════════════════════════════
+         1. PIN
+    ══════════════════════════════════════ -->
+    <section id="pinSection" class="page active">
+      <div class="hero-emoji float">🔐</div>
+      <h2>Enter the four-digit code.</h2>
+      <div id="pinDisplay" class="pin-display">○ ○ ○ ○</div>
+      <div id="keypad" class="keypad">
+        <button data-digit="1">1</button>
+        <button data-digit="2">2</button>
+        <button data-digit="3">3</button>
+        <button data-digit="4">4</button>
+        <button data-digit="5">5</button>
+        <button data-digit="6">6</button>
+        <button data-digit="7">7</button>
+        <button data-digit="8">8</button>
+        <button data-digit="9">9</button>
+        <button id="clearPin">Clear</button>
+        <button data-digit="0">0</button>
+        <button id="deletePin">⌫</button>
+      </div>
+      <p id="pinMessage" class="status" role="status"></p>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         2. CAKE + VIDEO + SONG
+         ─ Video file  : assets/videos/song.mp4
+           Replace the file to change the video.
+         ─ Cake GIF    : assets/images/cake.gif
+           Suggested sources for GIFs / stickers:
+             • https://giphy.com  (search "birthday cake")
+             • https://tenor.com
+             • https://sticker.ly
+           Download the GIF and save as assets/images/cake.gif
+         ─ Blown cake  : assets/images/cake-blown.gif
+           Same sources above, search "birthday slice"
+         ─ Celebration cats: assets/images/cat1.gif, cat2.gif, cat3.gif
+           Suggested: giphy.com → search "cat celebrate" / "cat party"
+           You can add more by editing ASSETS.celebrationCats in script.js
+    ══════════════════════════════════════ -->
+    <section id="cakeSection" class="page">
+      <p class="eyebrow">It's your special day!</p>
+      <h1>Happy 24th Birthday, Abiii! 🎉</h1>
+
+      <!-- VIDEO — replace assets/videos/song.mp4 with your own file -->
+      <div id="videoWrap" class="video-container">
+        <video id="birthdayVideo" playsinline preload="auto">
+          <source src="./assets/videos/song.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p id="videoStatus" class="status"></p>
+
+      <!-- CAKE + SONG — shown after video ends -->
+      <div id="songArea" class="scene hidden">
+        <button id="cakeButton" class="cake-button" disabled
+          aria-label="Blow out the candles">
+          <!-- cake image injected by script.js -->
+        </button>
+        <p id="cakeHint">Enjoy your birthday song! 🎶</p>
+        <div class="progress-track">
+          <div id="songProgress" class="progress-fill"></div>
+        </div>
+        <span id="songTimer">0 seconds</span>
+      </div>
+
+      <button id="playSongBtn" class="secondary hidden">▶ Play 10-second song</button>
+
+      <div id="celebration" class="hidden">
+        <h1>YAAAAAYYY!</h1>
+        <!--
+          Celebration cat GIFs: assets/images/cat1.gif, cat2.gif, cat3.gif
+          Add more by editing ASSETS.celebrationCats array in script.js
+          Suggested: giphy.com → "cat party" / "cat celebrate" / "dancing cat"
+        -->
+        <div id="celebrationCats" class="cat-row"></div>
+        <p>May all your wish come true!</p>
+      </div>
+
+      <button id="cakeNext" class="primary hidden">→</button>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         3. GIFTS
+         ─ Gift stickers: assets/images/gift1.gif, gift2.gif, gift3.gif
+           Suggested: giphy.com → "gift box" / "present"
+           Edit ASSETS.gifts in script.js to add more
+    ══════════════════════════════════════ -->
+    <section id="giftSection" class="page">
+      <p class="eyebrow">A little mystery</p>
+      <h1>Choose A Cat</h1>
+      <p>Only <strong>ONE</strong> can be selected</p>
+      <div id="giftGrid" class="gift-grid"></div>
+      <button id="shuffleBtn" class="secondary">Shuffle</button>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         3b. GIFT REVEAL
+    ══════════════════════════════════════ -->
+    <section id="giftRevealSection" class="page">
+      <img src="./assets/images/000.png" class="gift-reveal-sticker float" alt="Birthday surprise">
+      <h1>Happy Birthday, Big Cat!</h1>
+      <button id="giftRevealNext" class="primary">→</button>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         5. MEMORY GAME  (10 cards = 5 pairs)
+         ─ Card face stickers: assets/images/card1.gif … card5.gif
+           Replace each file to use your own stickers.
+           Edit ASSETS.cards array in script.js to match filenames.
+           Suggested: giphy.com → any cute themed stickers
+    ══════════════════════════════════════ -->
+    <section id="gameSection" class="page">
+      <p class="eyebrow">Mini birthday challenge</p>
+      <h1>Match the Pairs!</h1>
+      <p>Flip two cards. Find all three matching pairs!</p>
+      <div class="game-stats">
+        <span id="pairsCount">0 / 3 pairs</span>
+        <span id="attemptsCount">0 attempts</span>
+      </div>
+      <div id="gameGrid" class="game-grid"></div>
+      <p id="gameStatus" class="status"></p>
+      <button id="gameNext" class="primary hidden">→</button>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         6. HAPPY
+    ══════════════════════════════════════ -->
+    <section id="happySection" class="page">
+      <img src="./assets/images/cat.png" class="happy-cat float" alt="Happy cat">
+      <h1>Are you happy?</h1>
+      <p>Did this little surprise make you smile?</p>
+      <div id="answerArea" class="answer-area">
+        <button id="yesBtn" class="primary">YES!</button>
+        <button id="noBtn" class="secondary">NO</button>
+      </div>
+      <p class="status">There's only one correct answer!</p>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         7. RATING
+         ─ Rating stickers: assets/images/rate1.gif … rate5.gif
+           Each number (1–5) shows a different sticker in a modal.
+           Replace the files to use your own.
+           Edit ASSETS.ratings array in script.js to match filenames.
+           Suggested: giphy.com → "sad cat", "happy cat", "excited cat"
+    ══════════════════════════════════════ -->
+    <section id="ratingSection" class="page">
+      <div class="hero-emoji float">⭐</div>
+      <h1>How happy are you?</h1>
+      <p>Pick a number from 1 to 5!</p>
+      <div id="ratingButtons" class="rating-buttons">
+        <button data-rating="1">1</button>
+        <button data-rating="2">2</button>
+        <button data-rating="3">3</button>
+        <button data-rating="4">4</button>
+        <button data-rating="5">5</button>
+      </div>
+      <p>Each number has a different surprise reaction.</p>
+      <button id="ratingNext" class="primary">→</button>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         8. END
+    ══════════════════════════════════════ -->
+    <section id="finalSection" class="page">
+      <img src="./assets/images/last.png" class="last-sticker float" alt="Goodbye">
+      <h1>Happy Birthday Agaiiin!</h1>
+      <p>
+        I hope this little surprise made your day brighterrr.<br>
+        You deserve so much happiness, laughter, and love.
+      </p>
+      <button id="restartBtn" class="secondary">↻ Again</button>
+    </section>
+  </main>
+
+  <!-- ══════════════════════════════════════
+       REUSABLE MODAL
+  ══════════════════════════════════════ -->
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+      <!--
+        Modal visual: shows rating sticker (assets/images/rate1.gif … rate5.gif)
+        or gift sticker depending on context.
+      -->
+      <div id="modalVisual" class="modal-visual float"></div>
+      <h2 id="modalTitle"></h2>
+      <p id="modalMessage"></p>
+      <button id="modalClose" class="primary">Close</button>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
